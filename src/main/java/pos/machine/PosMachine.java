@@ -5,7 +5,11 @@ import java.util.List;
 
 public class PosMachine {
     public String printReceipt(List<String> barcodes) {
-        return null;
+        List<ReceiptItem> receiptItems = decodeToItems(barcodes);
+        Receipt receipt = calculateCost(receiptItems);
+        return renderReceipt(receipt);
+    }
+
     private List<ReceiptItem> decodeToItems(List<String> barcodes) {
         List<Item> items = ItemsLoader.loadAllItems();
         List<ReceiptItem> receiptItems = new ArrayList<>();
@@ -21,5 +25,14 @@ public class PosMachine {
         });
         return receiptItems;
     }
+
+    private Receipt calculateCost(List<ReceiptItem> receiptItems) {
+        List<ReceiptItem> receiptItemsWithSubtotal = calculatePerItem(receiptItems);
+        Receipt receipt = new Receipt();
+        receipt.setReceiptItems(receiptItemsWithSubtotal);
+        receipt.setTotalPrice(calculateTotalPrice(receiptItemsWithSubtotal));
+        return receipt;
+    }
+
     }
 }
