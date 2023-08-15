@@ -34,5 +34,10 @@ public class PosMachine {
         return receipt;
     }
 
+    private List<ReceiptItem> calculatePerItem(List<ReceiptItem> receiptItems) {
+        receiptItems.forEach(receiptItem -> receiptItem.setSubTotal(receiptItem.getQuantity() * receiptItem.getUnitPrice()));
+        return receiptItems;
+    }
+
     }
 }
