@@ -42,4 +42,10 @@ public class PosMachine {
     private int calculateTotalPrice(List<ReceiptItem> receiptItems) {
         return receiptItems.stream().mapToInt(ReceiptItem::getSubTotal).sum();
     }
+
+    private String renderReceipt(Receipt receipt) {
+        String itemsReceipt = generateItemsReceipt(receipt);
+        return generateReceipt(itemsReceipt, receipt.getTotalPrice());
+    }
+
 }
