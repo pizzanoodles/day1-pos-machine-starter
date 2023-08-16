@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PosMachine {
+    //TODO: use business terms in commit message instead of function name
     public String printReceipt(List<String> barcodes) {
         List<ReceiptItem> receiptItems = decodeToItems(barcodes);
         Receipt receipt = calculateCost(receiptItems);
